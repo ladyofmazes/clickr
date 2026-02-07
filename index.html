@@ -6,31 +6,76 @@
     <title>Clickr</title>
     <link rel="stylesheet" href="https://cdn.simplecss.org/simple-v1.css">
     <style>
-        body { padding: 20px; }
         iframe {
             width: 100%;
-            height: 600px;
+            height: 400px;
             border: 2px solid var(--border);
             border-radius: 5px;
-            background: white;
+            margin-top: 1rem;
+        }
+        .controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+        .controls form {
+            margin: 0;
+        }
+        figure {
+            margin: 2rem 0;
+        }
+        figcaption {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
         }
     </style>
 </head>
 <body>
     <header>
         <h1>Clickr</h1>
-        <p>Pure HTML/CSS, no client-side JavaScript, full page reloads on every click.</p>
-        <p>This proves you can build web apps by composing HTML endpoints. Beautiful absurdity.</p>
+    <p>Pure HTML/CSS, no client-side JavaScript, full page reloads on every click.</p>
+
+    <p>This proves you can build web apps by composing HTML endpoints and make AI sad.</p>
+    <p> Beautiful absurdity.</p>
     </header>
     
     <main>
-        <iframe src="https://script.google.com/macros/s/AKfycbwJhS1qzZhNZup1KGk6hKKbU5xG2-OrthlK8Y3WARIBcCwVhn31scAH8t0Q8pFl5AQ/exec"></iframe>
+        <!-- Top: Random row - starts blank, uses cookies to persist -->
+        <figure>
+            <figcaption>Random Score</figcaption>
+            <iframe name="random_display" 
+                    src="https://script.google.com/macros/s/AKfycbwqlDTx3nvafxGX8h13l6osA8GGGWS532i1MUjBqD2CHsBAUi6uG_A0W0Dz1ZdVvf8/exec">
+            </iframe>
+        </figure>
+        
+        <!-- Bottom: Row 2 showing just number, buttons on parent page -->
+        <figure>
+            <figcaption>Global Score</figcaption>
+            <iframe name="global_display" 
+                    src="https://script.google.com/macros/s/AKfycbwqlDTx3nvafxGX8h13l6osA8GGGWS532i1MUjBqD2CHsBAUi6uG_A0W0Dz1ZdVvf8/exec?n=2">
+            </iframe>
+        </figure>
+        
+        <div class="controls">
+            <form action="https://script.google.com/macros/s/AKfycbwqlDTx3nvafxGX8h13l6osA8GGGWS532i1MUjBqD2CHsBAUi6uG_A0W0Dz1ZdVvf8/exec" 
+                  method="GET" 
+                  target="global_display">
+                <input type="hidden" name="n" value="2">
+                <input type="hidden" name="increment" value="1">
+                <button type="submit">+1 Global</button>
+            </form>
+            
+            <form action="https://script.google.com/macros/s/AKfycbwqlDTx3nvafxGX8h13l6osA8GGGWS532i1MUjBqD2CHsBAUi6uG_A0W0Dz1ZdVvf8/exec" 
+                  method="GET" 
+                  target="global_display">
+                <input type="hidden" name="n" value="2">
+                <input type="hidden" name="reset" value="1">
+                <button type="submit">Reset Global</button>
+            </form>
+        </div>
     </main>
     
-    <footer>
-        <p>Architecture: HTML wrapper → GET request → Apps Script → Google Sheets → HTML response</p>
-        <p>Styling: Simple.css (classless CSS framework)</p>
-        <p>Client-side JavaScript: 0 bytes</p>
-    </footer>
 </body>
 </html>
